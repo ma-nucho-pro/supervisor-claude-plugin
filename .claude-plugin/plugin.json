@@ -1,0 +1,20 @@
+{
+  "name": "supervisor",
+  "description": "Strict multi-agent Supervisor for Claude Code: web-grounded anti-hallucination, expert coding/frontend implementation, independent judges, adversarial review, and final Stop release gate.",
+  "version": "1.0.0",
+  "keywords": [
+    "anti-hallucination",
+    "coding",
+    "fan-out",
+    "final-judge",
+    "frontend",
+    "internet",
+    "multi-agent",
+    "quality-gate",
+    "red-team",
+    "review",
+    "supervisor",
+    "verification",
+    "web-research"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/inject-supervision.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "model": "sonnet",
+            "timeout": 60,
+            "prompt": "Supervisor final gate. Evaluate $ARGUMENTS. For substantive factual/technical answers require truthful web/source verification where applicable, a concise Verification Receipt, no fabricated tool/test/search claims, material requirements satisfied, and no P0/P1. Code/frontend success claims need real checks proportional to the task. If stop_hook_active is true, block again only for a clear critical failure. Return {\"ok\": true} or {\"ok\": false, \"reason\": \"specific required fix\"}."
+          }
+        ]
+      }
+    ]
+  }
+}

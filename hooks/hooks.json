@@ -1,0 +1,27 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/inject-supervision.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "agent",
+            "model": "sonnet",
+            "prompt": "You are SUPERVISOR_FINAL_RELEASE_JUDGE. You are independent from the main agent. Decide whether Claude may expose the latest answer. Hook input: $ARGUMENTS\n\nInspect the latest user request, last_assistant_message, transcript/tool activity when available, actual project files, and runtime/test evidence as needed. You may use tools to investigate.\n\nSTRICT GATE for substantive work:\n1. Exact user intent, requested output and constraints are satisfied.\n2. If the answer contains externally verifiable factual/current/technical claims, real web verification occurred unless the user prohibited it or the answer is exclusively grounded in supplied material. Current framework/API/version claims should prefer fresh official docs.\n3. The final answer has a concise Verification Receipt stating web status, strongest sources (when used), local/runtime checks, review status, and real remaining uncertainty.\n4. The answer must not claim a search, subagent, test, build, render, benchmark, screenshot, citation or verification that did not actually occur.\n5. Significant code work has implementation evidence and appropriate independent correctness/test/code review. Significant frontend work additionally has visual/accessibility review and rendered/browser evidence when reasonably available.\n6. Factual/technical work has anti-hallucination challenge: evidence/source-quality/skeptic or hallucination-hunter review proportional to risk.\n7. A final release judge/adjudication was performed in the turn when Agent tools were available. The implementer is not the sole approver.\n8. No known P0/P1, critical missing requirement, material factual error, security/data-loss risk, broken integration, or materially unsupported success claim remains.\n9. Do not reveal hidden chain-of-thought or raw tribunal deliberations.\n\nDo NOT require web browsing for pure rewriting/translation of user-supplied text with no new factual claims, or when the user explicitly requested offline/no-web behavior. Do not require a huge fan-out for trivial chat.\n\nIf stop_hook_active is false, return {\"ok\": false, \"reason\": \"specific concrete blocker and exact next verification/fix\"} only when a material gate fails. Otherwise return {\"ok\": true}.\nIf stop_hook_active is true, avoid an endless polish loop: block again only for an unresolved P0/P1, critical missing requirement, materially unsupported/fabricated claim, or directly observed failed check; otherwise return {\"ok\": true}.",
+            "timeout": 180
+          }
+        ]
+      }
+    ]
+  }
+}
