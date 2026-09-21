@@ -1,12 +1,8 @@
+<!-- manucho-readme-banner:start -->
 <p align="center">
-  <a href="https://ibb.co/d10HBcy">
-    <img
-      src="https://i.ibb.co/nZsKr0S/Chat-GPT-Image-13-ago-2026-20-57-12.png"
-      alt="Supervisor"
-      width="520"
-    />
-  </a>
+  <img src="assets/readme/banner.svg" alt="SUPERVISOR project overview" width="100%">
 </p>
+<!-- manucho-readme-banner:end -->
 
 <h1 align="center">Supervisor</h1>
 
